@@ -1,9 +1,9 @@
 console.log('hi');
-import puppeteer from 'puppeteer';
+const puppeteer = require('puppeteer');
 
 const SITE = 'https://viknocenter.ua/';
 
-(async () => {
+const getCurrentRate = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -16,10 +16,12 @@ const SITE = 'https://viknocenter.ua/';
     const fullTitle = await waitForSelector.evaluate(
       el => el.textContent
     );
-    console.log('fullTitle', fullTitle.split(' '));
+    const rate = fullTitle.split(' ')[2];
     await browser.close();
-    return content;
+    return rate;
   } catch (error) {
     console.log(error);
   }
-})();
+};
+
+module.exports = getCurrentRate;
