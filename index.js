@@ -3,17 +3,6 @@ import puppeteer from 'puppeteer';
 
 const SITE = 'https://viknocenter.ua/';
 
-const LAUNCH_PUPPETEER_OPTS = {
-  args: [
-    '--no-sandbox',
-    '--disable-setuis-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelereted-2d-canvas',
-    '--disable-gpu',
-    '--window-size=1920x1080',
-  ],
-};
-
 (async () => {
   try {
     const browser = await puppeteer.launch();
