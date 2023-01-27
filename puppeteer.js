@@ -1,5 +1,5 @@
-console.log('hi');
 const puppeteer = require('puppeteer');
+console.log('hi');
 
 const SITE = 'https://viknocenter.ua/';
 
