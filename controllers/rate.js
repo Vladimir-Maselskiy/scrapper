@@ -1,10 +1,5 @@
-const getCurrentRate = require('../puppeteer');
 const http = require('https');
 const SITE = 'https://viknocenter.ua/';
-
-// const ctrl = require('../controllers/rate');
-
-// const { createError } = require('../utils/createError');
 
 const rate = async (req, res, next) => {
   let result = null;
