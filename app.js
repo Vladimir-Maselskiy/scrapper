@@ -5,7 +5,7 @@ const cors = require('cors');
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
-const rateRouter = require('./routes/rate');
+const { rateRouter, healthRouter } = require('./routes');
 
 const app = express();
 
@@ -16,7 +16,8 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', rateRouter);
+app.use('/api/rate', rateRouter);
+app.use('/api/health', healthRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
