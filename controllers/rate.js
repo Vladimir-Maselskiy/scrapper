@@ -1,27 +1,30 @@
-const http = require('https');
+const https = require('https');
+const iconv = require('iconv-lite');
 const SITE = 'https://viknocenter.ua/';
 
-const rate = async (req, res, next) => {
+const rate = (req, res, next) => {
   let result = null;
   const data = [];
-  const reqw = await http.request(SITE, async resp => {
-    await resp.on('data', _ => {
-      data.push(_);
+  const request = https.request(SITE, resp => {
+    resp.setEncoding('binary');
+    resp.on('data', _ => {
+      data.push(iconv.decode(_, 'windows-1251'));
     });
-    await resp.on('end', () => {
+    resp.on('end', () => {
       const resFullString = data.join();
-      const start = data.join().indexOf('<h3');
-      const end = data.join().indexOf('</h3');
+      const start = resFullString.indexOf('<h3');
+      const end = resFullString.indexOf('</h3');
 
       result = resFullString
         .slice(start, end)
         .split(' ')[3];
+      console.log(resFullString);
       res.status(200).json({
         currentRate: result,
       });
     });
   });
-  reqw.end();
+  request.end();
 };
 
 module.exports = rate;
