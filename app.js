@@ -5,18 +5,18 @@ const cors = require('cors');
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
-const { rateRouter, healthRouter } = require('./routes');
+const { rateRouter, healthRouter, courseRouter } = require('./routes');
 
 const app = express();
 
-const formatsLogger =
-  app.get('env') === 'development' ? 'dev' : 'short';
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/rate', rateRouter);
+app.use('/api/preview-courses', courseRouter);
 app.use('/api/health', healthRouter);
 
 app.use((req, res) => {

@@ -1,7 +1,5 @@
-const fetch = require('node-fetch');
 const axios = require('axios');
-// import fetch from ('node-fetch');
-// const https = require('https');
+
 const SITE =
   'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
 
